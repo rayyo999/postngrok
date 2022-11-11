@@ -19,28 +19,30 @@ export default function Home() {
       '🚀 -> file: PutDataOnChainPage.tsx -> line 55 -> onChainFn -> transferData',
       transferData
     )
-    if (n === 1) {
-      const res = await fetch(url, {
-        method: 'POST',
-        mode: 'no-cors',
-        body: JSON.stringify(transferData),
-        headers: new Headers({
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-        }),
-      })
-      console.log('🚀 -> file: PutDataOnChainPage.tsx -> line 68 -> onChainFn -> res', res)
-      const data = await res.json()
-      console.log('🚀 -> file: PutDataOnChainPage.tsx -> line 65 -> onChainFn -> data', data)
-      return data
-    }
-    if (n === 2) {
-      // const { data } = await axios.post(BLOCKCHAIN_URL, {
-      axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8'
-      axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*'
-      const { data } = await axios.post('https://cbfa-36-228-77-166.jp.ngrok.io/data', transferData)
-      return data
-    }
+    const { data } = await axios.post(url, transferData)
+    return data
+    // if (n === 1) {
+    //   const res = await fetch(url, {
+    //     method: 'POST',
+    //     mode: 'no-cors',
+    //     body: JSON.stringify(transferData),
+    //     headers: new Headers({
+    //       'Content-Type': 'application/json',
+    //       'Access-Control-Allow-Origin': '*',
+    //     }),
+    //   })
+    //   console.log('🚀 -> file: PutDataOnChainPage.tsx -> line 68 -> onChainFn -> res', res)
+    //   const data = await res.json()
+    //   console.log('🚀 -> file: PutDataOnChainPage.tsx -> line 65 -> onChainFn -> data', data)
+    //   return data
+    // }
+    // if (n === 2) {
+    //   // const { data } = await axios.post(BLOCKCHAIN_URL, {
+    //   axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8'
+    //   axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*'
+    //   const { data } = await axios.post('https://cbfa-36-228-77-166.jp.ngrok.io/data', transferData)
+    //   return data
+    // }
   }
   const onChainConfig = {
     onMutate: () => {
@@ -63,8 +65,8 @@ export default function Home() {
       </Head>
       <div>傳送狀態：{displayStatus}</div>
       <div>
-        <button onClick={() => putDataOnChain(1)}>傳送1</button>
-        <button onClick={() => putDataOnChain(2)}>傳送2</button>
+        <button onClick={() => putDataOnChain(1)}>傳送</button>
+        {/* <button onClick={() => putDataOnChain(2)}>傳送2</button> */}
       </div>
     </div>
   )
